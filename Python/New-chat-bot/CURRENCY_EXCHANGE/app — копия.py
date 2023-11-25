@@ -49,5 +49,4 @@ def get_price(message: telebot.types.Message):
 
 bot.polling()
 
-#
-
+# sxs
