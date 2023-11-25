@@ -1,5 +1,5 @@
-TOKEN = '6430991568:AAEb3u1j8sjRtoPVvlttc8RUhTvd3JuJf1g'
-# https://t.me/AD_CurrencyExchangeBot
+import passwd
+TOKEN = passwd.TOKEN
 
 keys = {
     'евро': 'EUR',
@@ -7,4 +7,3 @@ keys = {
     'рубль': 'RUB'
 }
 
-#12
