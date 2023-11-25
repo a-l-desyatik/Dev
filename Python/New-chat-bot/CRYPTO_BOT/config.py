@@ -1,5 +1,6 @@
-TOKEN = '6500406083:AAHHywC0qaY9gOxMDvk4E1PJuDOtLdwMk7w'
-# https://t.me/AiTi_CryptoBot
+import passwd
+TOKEN = passwd.TOKEN
+
 keys = {
     'биткоин': 'BTC',
     'эфириум': 'ETH',
