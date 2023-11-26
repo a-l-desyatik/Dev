@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Django_prj/.idea/Django_prj.iml" filepath="$PROJECT_DIR$/../Django_prj/.idea/Django_prj.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/New-chat-bot.iml" filepath="$PROJECT_DIR$/.idea/New-chat-bot.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/nero-chat-bot/.idea/nero-chat-bot.iml" filepath="$USER_HOME$/PycharmProjects/nero-chat-bot/.idea/nero-chat-bot.iml" />
     </modules>
   </component>
 </project>

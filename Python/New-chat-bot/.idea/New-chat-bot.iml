@@ -6,5 +6,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Django_prj" />
+    <orderEntry type="module" module-name="nero-chat-bot" />
   </component>
 </module>
