@@ -1,0 +1,73 @@
+#Файл, с списоком всех команд, запускаемых в Django shell.
+
+# Импорт моделей созданных в приложении new проекта NewsPortal
+from django.contrib.auth.models import User
+from news.models import Author, Category, Post, Comment
+
+# 1.
+user1 = User.objects.create_user('username1')
+user2 = User.objects.create_user('username2')
+
+# 2.
+author1 = Author.objects.create(user=user1)
+author2 = Author.objects.create(user=user2)
+
+# 3.
+category1 = Category.objects.create(name='Category 1')
+category2 = Category.objects.create(name='Category 2')
+category3 = Category.objects.create(name='Category 3')
+category4 = Category.objects.create(name='Category 4')
+
+# 4.
+article1 = Post.objects.create(author=author1, post_type='AR', title='Article 1', text='Text of article 1')
+article2 = Post.objects.create(author=author1, post_type='AR', title='Article 2', text='Text of article 2')
+news1 = Post.objects.create(author=author2, post_type='NW', title='News 1', text='Text of news 1')
+
+# 5.
+article1.category.add(category1, category2)
+article2.category.add(category2)
+news1.category.add(category3, category4)
+
+# 6.
+comment1 = Comment.objects.create(post=article1, user=user1, text='Comment 1')
+comment2 = Comment.objects.create(post=article1, user=user2, text='Comment 2')
+comment3 = Comment.objects.create(post=article2, user=user1, text='Comment 3')
+comment4 = Comment.objects.create(post=news1, user=user2, text='Comment 4')
+
+# 7.
+article1.like()
+article2.dislike()
+news1.like()
+
+comment1.like()
+comment2.dislike()
+comment3.like()
+comment4.like()
+
+# 8.
+author1.update_rating()
+author2.update_rating()
+
+# 9.
+best_author = Author.objects.order_by('-rating').first()
+print(f'Best author: {best_author.user.username}, Rating: {best_author.rating}')
+
+## Best author: username2, Rating: 4
+
+
+# 10.
+best_article = Post.objects.filter(post_type='AR').order_by('-rating').first()
+print(f'Date: {best_article.created_at}, Author: {best_article.author.user.username}, '
+      f'Rating: {best_article.rating}, Title: {best_article.title}, Preview: {best_article.preview()}')
+
+###Date: 2024-01-12 13:29:39.983916+00:00, Author: username1, Rating: 1, Title: Article 1, Preview: Text of article 1...
+
+
+
+# 11.
+comments = Comment.objects.filter(post=best_article)
+for comment in comments:
+    print(f'Date: {comment.created_at}, User: {comment.user.username}, Rating: {comment.rating}, Text: {comment.text}')
+
+##Date: 2024-01-12 13:30:14.390491+00:00, User: username1, Rating: 1, Text: Comment 1
+##Date: 2024-01-12 13:30:18.488182+00:00, User: username2, Rating: -1, Text: Comment 2

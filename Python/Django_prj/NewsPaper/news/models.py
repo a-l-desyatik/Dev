@@ -1,14 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import Sum
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
 
     def update_rating(self):
-        # Логика для обновления рейтинга автора
+        # Рейтинг постов (умноженный на 3)
+        post_rating = self.post_set.aggregate(post_rating=Sum('rating')).get('post_rating') * 3
 
-class Category(models.Model):
+        # Рейтинг комментариев автора
+        comment_rating = self.user.comment_set.aggregate(comment_rating=Sum('rating')).get('comment_rating')
+
+        # Рейтинг комментариев к постам автора
+        comment_post_rating = Comment.objects.filter(post__author=self).aggregate(comment_post_rating=Sum('rating')).get('comment_post_rating')
+
+        # Обновление рейтинга автора
+        self.rating = (post_rating or 0) + (comment_rating or 0) + (comment_post_rating or 0)
+        self.save()
+
+ class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
 class Post(models.Model):
