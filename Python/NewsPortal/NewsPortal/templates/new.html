@@ -1,0 +1,12 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+
+{% block title %}
+New
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ new.title|censor }}</h1>
+    <p>Опубликовано: {{ new.created_at|date:"d M Y H:i" }}</p>
+    <h5>{{ new.text|censor }}</h5>
+{% endblock content %}
