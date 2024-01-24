@@ -27,4 +27,16 @@ News
     {% else %}
         <h2> Новостей нет! <h2>
     {% endif %}
+
+<span>Страница {{ current_page }} из {{ last_page }}</span>
+    <a href="?page={{ first_page }}">Первая</a>
+    {% for num in pages_range %}
+        {% if num != current_page %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% else %}
+            <strong>{{ num }}</strong>
+        {% endif %}
+    {% endfor %}
+    <a href="?page={{ last_page }}">Последняя</a>
+
 {% endblock content %}

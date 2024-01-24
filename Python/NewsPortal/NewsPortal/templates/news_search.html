@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+{% block content %}
+    <h2>Поиск новостей</h2>
+    <form method="get">
+        {{ filter.form.as_p }}
+        <button type="submit">Поиск</button>
+    </form>
+
+    <h2>Результаты поиска</h2>
+    {% for post in filter.qs %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p>Автор: {{ post.author.user.username }}</p>
+            <p>Дата публикации: {{ post.created_at }}</p>
+        </div>
+    {% empty %}
+        <p>Новости не найдены.</p>
+    {% endfor %}
+{% endblock %}
